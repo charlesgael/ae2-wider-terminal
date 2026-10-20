@@ -1,3 +1,5 @@
+<img src="src/main/resources/logo.png" alt="Wide AE2 Terminals icon" width="96" align="right">
+
 # Wide AE2 Terminals
 
 A client-side NeoForge mod that widens the [Applied Energistics 2](https://modrinth.com/mod/ae2) terminals: instead of

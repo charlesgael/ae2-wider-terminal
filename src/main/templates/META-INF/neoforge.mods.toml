@@ -9,6 +9,9 @@ version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "cdjedai"
 displayURL = "https://github.com/charlesgael/ae2-wider-terminal"
+logoFile = "logo.png"
+# Pixel art: keep it sharp in the mod list
+logoBlur = false
 # Client-side only: the server does not need it and vanilla clients/servers stay compatible
 displayTest = "IGNORE_ALL_VERSION"
 description = '''
