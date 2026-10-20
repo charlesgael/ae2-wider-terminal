@@ -42,7 +42,7 @@ The terminal height still follows the AE2 "terminal style" setting (small, mediu
 ## Compatibility
 
 - Minecraft 1.21.1, NeoForge
-- Applied Energistics 2 19.2.17 or later 19.2.x
+- Applied Energistics 2 19.2.x (19.2.0-beta and later)
 - Client-side only: not needed on the server, and works on servers without it
 
 ## Building
