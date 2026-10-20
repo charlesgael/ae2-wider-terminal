@@ -15,10 +15,19 @@ public final class SupportedScreens {
             "de.mari_023.ae2wtlib.wct.WCTScreen",
             "de.mari_023.ae2wtlib.wet.WETScreen");
 
+    private static final Set<String> PATTERN_ACCESS_SCREENS = Set.of(
+            "appeng.client.gui.me.patternaccess.PatternAccessTermScreen",
+            // ae2wtlib: wireless pattern access terminal
+            "de.mari_023.ae2wtlib.wat.WATScreen");
+
     private SupportedScreens() {
     }
 
     public static boolean isStorageScreen(Object screen) {
         return STORAGE_SCREENS.contains(screen.getClass().getName());
+    }
+
+    public static boolean isPatternAccessScreen(Object screen) {
+        return PATTERN_ACCESS_SCREENS.contains(screen.getClass().getName());
     }
 }

@@ -10,6 +10,7 @@ import com.cdjedai.wide_ae2_terminals.mixin.ScreenStyleAccessor;
 import net.minecraft.client.gui.GuiGraphics;
 
 import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -206,6 +207,84 @@ public final class WideLayout {
             // Overlay of the 9 slots of the pinned row, with the same borders as the grid
             var overlay = Blitter.texture("guis/terminal.png").src(0, 204, BASE_COLUMNS * SLOT_SIZE, SLOT_SIZE);
             drawWideRow(g, overlay, x + GRID_LEFT, y + header.getSrcHeight(), columns, TERMINAL_INSERT_AT - GRID_LEFT);
+        }
+    }
+
+    // ---------------------------------------------------------------------------------------------------------------
+    // Pattern access terminals (AE2 and ExtendedAE)
+    // ---------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Texture layout of a pattern access terminal. Text rows (provider names) and slot rows each have a top, middle
+     * and bottom version; a slot row is drawn over a text row, only as wide as its slots.
+     */
+    public record PatternAccessTexture(String texture, int headerHeight, int textTopY, int textMiddleY,
+            int textBottomY, int slotsTopY, int slotsMiddleY, int slotsBottomY, int footerY, int footerHeight) {
+        public static final int WIDTH = 195;
+        /** Where the slot columns start: one pixel further than in the other terminal textures. */
+        private static final int GRID_LEFT = 8;
+        /**
+         * Before the last slot column, which also holds the right border of the scroll box (x=168). The left part of
+         * the header may hold the search box (ExtendedAE).
+         */
+        private static final int INSERT_AT = GRID_LEFT + (BASE_COLUMNS - 1) * SLOT_SIZE;
+
+        public static final PatternAccessTexture AE2 = new PatternAccessTexture("guis/patternaccessterminal.png",
+                17, 17, 53, 89, 35, 71, 107, 125, 99);
+        public static final PatternAccessTexture EXTENDED_AE = new PatternAccessTexture(
+                "guis/ex_pattern_access_terminal.png", 30, 30, 66, 102, 48, 84, 120, 138, 99);
+    }
+
+    /**
+     * Same drawing as PatternAccessTermScreen.drawBG (and its ExtendedAE copy), with the rows widened.
+     */
+    public static void drawPatternAccessBackground(GuiGraphics g, PatternAccessTexture layout, PatternAccessRows access,
+            List<?> rows, int scrollLevel, int visibleRows, int x, int y, int columns) {
+        var texture = Blitter.texture(layout.texture());
+        int width = PatternAccessTexture.WIDTH;
+        drawWideRow(g, texture.copy().src(0, 0, width, layout.headerHeight()), x, y, columns,
+                PatternAccessTexture.INSERT_AT);
+        int currentY = y + layout.headerHeight();
+        drawBottom(g, texture.copy().src(0, layout.footerY(), width, layout.footerHeight()), x,
+                currentY + visibleRows * SLOT_SIZE, columns);
+
+        for (int i = 0; i < visibleRows; i++) {
+            boolean firstLine = i == 0;
+            boolean lastLine = i == visibleRows - 1;
+
+            int textY = firstLine ? layout.textTopY() : lastLine ? layout.textBottomY() : layout.textMiddleY();
+            drawWideRow(g, texture.copy().src(0, textY, width, SLOT_SIZE), x, currentY, columns,
+                    PatternAccessTexture.INSERT_AT);
+
+            if (scrollLevel + i < rows.size()) {
+                var row = rows.get(scrollLevel + i);
+                if (access.isSlotsRow(row)) {
+                    int slotsY = firstLine ? layout.slotsTopY() : lastLine ? layout.slotsBottomY()
+                            : layout.slotsMiddleY();
+                    drawSlotsRow(g, texture.copy().src(0, slotsY, width, SLOT_SIZE), x, currentY, access.slots(row),
+                            columns);
+                }
+            }
+            currentY += SLOT_SIZE;
+        }
+    }
+
+    /**
+     * Draws the slots of a pattern access row, cut like AE2 does (at gridLeft - 1 + 18 * slots). A row filling all
+     * the columns ends with the last column of the texture, which holds the right border of the scroll box.
+     */
+    private static void drawSlotsRow(GuiGraphics g, Blitter b, int x, int y, int slots, int columns) {
+        int gridLeft = PatternAccessTexture.GRID_LEFT;
+        int rowEnd = gridLeft - 1 + slots * SLOT_SIZE;
+        if (slots == columns) {
+            drawInserted(g, b, x, y, columns - BASE_COLUMNS, PatternAccessTexture.INSERT_AT, rowEnd);
+            return;
+        }
+
+        blitPart(g, b, 0, 0, gridLeft, b.getSrcHeight(), x, y);
+        for (int col = 0; col < slots; col++) {
+            int w = col + 1 == slots ? SLOT_SIZE - 1 : SLOT_SIZE;
+            blitPart(g, b, gridLeft, 0, w, b.getSrcHeight(), x + gridLeft + col * SLOT_SIZE, y);
         }
     }
 
