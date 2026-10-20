@@ -9,5 +9,13 @@
   "overwrites": {
     "requireAnnotations": true
   },
-  "client": []
+  "client": [
+    "BlitterAccessor",
+
+    "EncodingModePanelMixin",
+
+    "MEStorageScreenMixin",
+
+    "ScreenStyleAccessor"
+  ]
 }
