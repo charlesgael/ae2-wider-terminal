@@ -1,0 +1,29 @@
+name: Dependency check
+
+# Daily: looks for new 1.21.1 versions of AE2, AE2 Wireless Terminals and ExtendedAE on Modrinth, and opens an issue
+# when a new version changes files the mod relies on (see .github/dependency-watch.json).
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # javap, to compare the classes
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Check the dependencies
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/check_dependencies.py

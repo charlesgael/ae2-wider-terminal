@@ -1,0 +1,58 @@
+{
+  "$comment": "Checked daily by .github/workflows/dependency-check.yml. 'checked' is the latest version verified with the mod; 'files' are the jar entries the mod relies on (glob patterns, nested jars flattened). Update 'checked' once a new version has been verified.",
+  "gameVersion": "1.21.1",
+  "loader": "neoforge",
+  "dependencies": [
+    {
+      "name": "Applied Energistics 2",
+      "modrinth": "ae2",
+      "checked": "19.2.18",
+      "files": [
+        "appeng/client/gui/AEBaseScreen.class",
+        "appeng/client/gui/WidgetContainer.class",
+        "appeng/client/gui/style/*.class",
+        "appeng/client/gui/widgets/AETextField.class",
+        "appeng/client/gui/widgets/Scrollbar.class",
+        "appeng/client/gui/me/common/MEStorageScreen*.class",
+        "appeng/client/gui/me/common/Repo*.class",
+        "appeng/client/gui/me/items/*Panel*.class",
+        "appeng/client/gui/me/items/CraftingTermScreen*.class",
+        "appeng/client/gui/me/items/PatternEncodingTermScreen*.class",
+        "appeng/client/gui/me/patternaccess/*.class",
+        "assets/ae2/screens/common/*.json",
+        "assets/ae2/screens/terminals/*.json",
+        "assets/ae2/screens/terminals/encoding/*.json",
+        "assets/ae2/textures/guis/terminal.png",
+        "assets/ae2/textures/guis/crafting.png",
+        "assets/ae2/textures/guis/pattern.png",
+        "assets/ae2/textures/guis/pattern_modes.png",
+        "assets/ae2/textures/guis/patternaccessterminal.png",
+        "assets/ae2/textures/guis/text_field.png"
+      ]
+    },
+    {
+      "name": "AE2 Wireless Terminals",
+      "modrinth": "applied-energistics-2-wireless-terminals",
+      "checked": "19.5.1",
+      "files": [
+        "de/mari_023/ae2wtlib/wct/WCTScreen*.class",
+        "de/mari_023/ae2wtlib/wet/WETScreen*.class",
+        "de/mari_023/ae2wtlib/wat/WATScreen*.class",
+        "assets/ae2/screens/wtlib/*.json",
+        "assets/ae2/textures/wtlib/guis/crafting.png"
+      ]
+    },
+    {
+      "name": "ExtendedAE",
+      "modrinth": "extended-ae",
+      "checked": "1.21-2.2.35-neoforge",
+      "files": [
+        "com/glodblock/github/extendedae/client/gui/GuiExPatternTerminal*.class",
+        "com/glodblock/github/extendedae/xmod/wt/GuiWirelessExPAT*.class",
+        "assets/ae2/screens/ex_pattern_access_terminal.json",
+        "assets/ae2/screens/wireless_ex_pat.json",
+        "assets/ae2/textures/guis/ex_pattern_access_terminal.png"
+      ]
+    }
+  ]
+}
