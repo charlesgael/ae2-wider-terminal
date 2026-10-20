@@ -1,0 +1,63 @@
+name: Release
+
+# Push a tag like v1.0.0 to build the jar with that version, create the GitHub release and publish it on Modrinth and
+# CurseForge. Each platform is skipped until its project ID (repository variable) and token (secret) are set:
+# - variables: MODRINTH_ID, CURSEFORGE_ID
+# - secrets: MODRINTH_TOKEN, CURSEFORGE_TOKEN
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history, for the changelog
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Read the version from the tag
+        run: echo "VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+
+      - name: Build
+        run: ./gradlew build -Pmod_version="$VERSION"
+
+      - name: Changelog (commits since the previous tag)
+        run: |
+          previous=$(git describe --tags --abbrev=0 "$GITHUB_REF_NAME^" 2>/dev/null || true)
+          range=${previous:+$previous..}$GITHUB_REF_NAME
+          git log --no-merges --pretty='- %s' "$range" > changelog.md
+          cat changelog.md
+
+      - name: Publish
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          modrinth-id: ${{ vars.MODRINTH_ID }}
+          modrinth-token: ${{ vars.MODRINTH_ID != '' && secrets.MODRINTH_TOKEN || '' }}
+          curseforge-id: ${{ vars.CURSEFORGE_ID }}
+          curseforge-token: ${{ vars.CURSEFORGE_ID != '' && secrets.CURSEFORGE_TOKEN || '' }}
+
+          files: build/libs/*.jar
+          name: Wide AE2 Terminals ${{ env.VERSION }}
+          version: ${{ env.VERSION }}
+          version-type: release
+          changelog-file: changelog.md
+
+          loaders: neoforge
+          game-versions: 1.21.1
+          java: 21
+          dependencies: |
+            ae2(required){modrinth:ae2}{curseforge:223794}
+            ae2wtlib(optional){modrinth:applied-energistics-2-wireless-terminals}{curseforge:304024}
+            extendedae(optional){modrinth:extended-ae}{curseforge:892005}
