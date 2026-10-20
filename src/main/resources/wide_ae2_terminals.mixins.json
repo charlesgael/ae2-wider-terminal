@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "com.cdjedai.wide_ae2_terminals.mixin",
+  "plugin": "com.cdjedai.wide_ae2_terminals.WideMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [],
   "injectors": {
@@ -11,13 +12,10 @@
   },
   "client": [
     "BlitterAccessor",
-
     "EncodingModePanelMixin",
-
+    "ExPatternTerminalMixin",
     "MEStorageScreenMixin",
-
     "PatternAccessTermScreenMixin",
-
     "ScreenStyleAccessor"
   ]
 }

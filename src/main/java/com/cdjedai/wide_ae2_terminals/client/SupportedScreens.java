@@ -20,6 +20,11 @@ public final class SupportedScreens {
             // ae2wtlib: wireless pattern access terminal
             "de.mari_023.ae2wtlib.wat.WATScreen");
 
+    private static final Set<String> EX_PATTERN_ACCESS_SCREENS = Set.of(
+            // ExtendedAE: extended pattern access terminal, wired and wireless
+            "com.glodblock.github.extendedae.client.gui.GuiExPatternTerminal",
+            "com.glodblock.github.extendedae.xmod.wt.GuiWirelessExPAT");
+
     private SupportedScreens() {
     }
 
@@ -29,5 +34,9 @@ public final class SupportedScreens {
 
     public static boolean isPatternAccessScreen(Object screen) {
         return PATTERN_ACCESS_SCREENS.contains(screen.getClass().getName());
+    }
+
+    public static boolean isExPatternAccessScreen(Object screen) {
+        return EX_PATTERN_ACCESS_SCREENS.contains(screen.getClass().getName());
     }
 }
