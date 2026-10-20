@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "cdjedai"
+# Client-side only: the server does not need it and vanilla clients/servers stay compatible
+displayTest = "IGNORE_ALL_VERSION"
+description = '''
+Widens the Applied Energistics 2 terminals: the number of storage columns adapts to the window width.
+'''
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[dependencies.${ mod_id }]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "ae2"
+type = "required"
+versionRange = "${ae2_version_range}"
+ordering = "AFTER"
+side = "CLIENT"

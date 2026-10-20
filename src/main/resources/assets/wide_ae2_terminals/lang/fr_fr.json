@@ -1,0 +1,11 @@
+{
+  "wide_ae2_terminals.configuration.title": "Wide AE2 Terminals",
+  "wide_ae2_terminals.configuration.section.wide_ae2_terminals.client.toml": "Réglages client",
+  "wide_ae2_terminals.configuration.section.wide_ae2_terminals.client.toml.title": "Réglages client",
+  "wide_ae2_terminals.configuration.columnCount": "Nombre de colonnes",
+  "wide_ae2_terminals.configuration.columnCount.tooltip": "Nombre de colonnes de stockage. 0 = s'adapte à la largeur de la fenêtre. Jamais moins de 9.",
+  "wide_ae2_terminals.configuration.maxColumns": "Colonnes max",
+  "wide_ae2_terminals.configuration.maxColumns.tooltip": "Plafond du nombre de colonnes en mode adaptatif (ignoré si le nombre de colonnes est fixé). 0 = sans limite.",
+  "wide_ae2_terminals.configuration.sideMargin": "Marge latérale",
+  "wide_ae2_terminals.configuration.sideMargin.tooltip": "Espace (en pixels GUI) laissé libre de chaque côté du terminal (pour JEI et les boutons latéraux) quand le nombre de colonnes s'adapte."
+}
