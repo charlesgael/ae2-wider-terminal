@@ -10,7 +10,10 @@ public final class SupportedScreens {
     private static final Set<String> STORAGE_SCREENS = Set.of(
             "appeng.client.gui.me.common.MEStorageScreen",
             "appeng.client.gui.me.items.CraftingTermScreen",
-            "appeng.client.gui.me.items.PatternEncodingTermScreen");
+            "appeng.client.gui.me.items.PatternEncodingTermScreen",
+            // ae2wtlib: wireless crafting and pattern encoding terminals
+            "de.mari_023.ae2wtlib.wct.WCTScreen",
+            "de.mari_023.ae2wtlib.wet.WETScreen");
 
     private SupportedScreens() {
     }
