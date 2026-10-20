@@ -5,6 +5,12 @@ the fixed 9 columns, the number of storage columns adapts to the width of your w
 
 The storage area grows, while the player inventory and crafting area keep their size and stay centered below it.
 
+![ME terminal](docs/screenshots/me-terminal.webp)
+
+| Crafting terminal | Pattern encoding terminal |
+|---|---|
+| ![Crafting terminal](docs/screenshots/crafting-terminal.webp) | ![Pattern encoding terminal](docs/screenshots/pattern-encoding-terminal.webp) |
+
 ## Supported terminals
 
 | Mod                                                                                              | Terminals                                                     |
