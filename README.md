@@ -13,6 +13,11 @@ The storage area grows, while the player inventory and crafting area keep their 
 |---|---|
 | ![Crafting terminal](docs/screenshots/crafting-terminal.webp) | ![Pattern encoding terminal](docs/screenshots/pattern-encoding-terminal.webp) |
 
+## Download
+
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/ae2-wider-terminal)
+- [GitHub releases](https://github.com/charlesgael/ae2-wider-terminal/releases)
+
 ## Supported terminals
 
 | Mod                                                                                              | Terminals                                                     |
